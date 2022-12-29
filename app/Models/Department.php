@@ -19,8 +19,8 @@ class Department extends Model
     ];
 
     protected $hidden = [
-        'is_active',
-        'limit'
+        // 'is_active',
+        // 'limit'
     ];
 
     protected $casts = [
