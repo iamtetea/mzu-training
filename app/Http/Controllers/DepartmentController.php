@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DepartmentRequest;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $depts = Department::all();
+        $depts = Department::with('branches')->orderBy('limit', 'asc')->get();
         return view('departments', compact('depts'));
     }
 
@@ -34,29 +35,14 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
-        // dd($request);
-
-        $request->validate([
-            'name' => 'required',
-            'branch' => 'required',
-            'limit' => 'required',
-            'code' => 'required',
-        ]);
-
         $data = new Department();
         $data->name = $request->name;
         $data->branch = $request->branch;
         $data->limit = $request->limit;
         $data->code = $request->code;
         $data->is_active = $request->is_active == 'on' ? 1 : 0;
-
-        // if ($request->is_active == 'on') {
-        //     $data->is_active = 1;
-        // } else {
-        //     $data->is_active = 0;
-        // }
 
         $data->save();
         return redirect('/departments')->with('success', 'Department saved successfully');
@@ -70,7 +56,8 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        // dd($id);
+        $data = Department::findOrFail($id);
+        return view('department-details', compact('data'));
     }
 
     /**
@@ -91,9 +78,17 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentRequest $request, $id)
     {
-        //
+        $data = Department::findOrFail($id);
+        $data->name = $request->name;
+        $data->branch = $request->branch;
+        $data->limit = $request->limit;
+        $data->code = $request->code;
+        $data->is_active = $request->is_active == 'on' ? 1 : 0;
+        $data->save();
+
+        return redirect('/departments')->with('success', 'Department updated successfully');
     }
 
     /**

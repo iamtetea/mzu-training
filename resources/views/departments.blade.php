@@ -43,14 +43,20 @@
     </head>
     <body>
         <div>DEPARTMENT LIST</div>
-        {{-- <div>
+        <div>
             @foreach ($depts as $dept)
-                <li>{{ $dept->name }}</li>
+                <ul>
+                    {{ $dept->name }}
+                    @foreach ($dept->branches as $branch)
+                        <li>{{ $branch->name }}</li>
+                    @endforeach
+                </ul>
             @endforeach
-        </div> --}}
+        </div>
 
         <table class="mt-5">
             <tr>
+              <th>ID</th>
               <th>NAME</th>
               <th>CODE</th>
               <th>BRANCH</th>
@@ -61,6 +67,7 @@
 
             @foreach ($depts as $dept)
                 <tr>
+                  <td>{{ $dept->id }}</td>
                   <td>{{ $dept->name }}</td>
                   <td>{{ $dept->code }}</td>
                   <td>{{ $dept->branch }}</td>
@@ -68,7 +75,9 @@
                   <td>{{ $dept->is_active }}</td>
 
                   <td>
-                    <button>EDIT</button>
+                    <button>
+                        <a href="{{ '/departments/' . $dept->id }}">EDIT</a>
+                    </button>
 
                     <form action="{{ '/departments/' . $dept->id }}" method="post">
                         @csrf

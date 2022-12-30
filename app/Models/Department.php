@@ -27,4 +27,9 @@ class Department extends Model
         'name' => 'string',
         'limit' => 'string',
     ];
+
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
 }
