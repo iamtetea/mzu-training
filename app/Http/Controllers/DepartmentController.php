@@ -102,4 +102,9 @@ class DepartmentController extends Controller
         Department::destroy($id);
         return redirect('/departments')->with('success', 'Department deleted successfully');
     }
+
+    public function pages()
+    {
+        return view('pages');
+    }
 }
