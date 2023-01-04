@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/contact', [HomeController::class, 'contact']);
 
-Route::get('/departments', [DepartmentController::class, 'index']);
-Route::get('/departments/{id}', [DepartmentController::class, 'show']);
-Route::post('/departments', [DepartmentController::class, 'store']);
-Route::put('/departments/{id}', [DepartmentController::class, 'update']);
-Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
+Route::resources([
+    'contact' => ContactController::class,
+    'departments' => DepartmentController::class,
+]);
+
+// Route::resource('contact', ContactController::class);
+// Route::resource('departments', ContactController::class);
+
+// Route::get('/departments', [DepartmentController::class, 'index']);
+// Route::get('/departments/{id}', [DepartmentController::class, 'show']);
+// Route::post('/departments', [DepartmentController::class, 'store']);
+// Route::put('/departments/{id}', [DepartmentController::class, 'update']);
+// Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
