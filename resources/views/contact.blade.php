@@ -5,24 +5,25 @@
         <div class="row gx-3">
             <div class="col">
                 <div class="text-center">CONTACT LISTS:</div>
+
                 <table class="table table-bordered table-responsive">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">EMAIL</th>
-                        <th scope="col">DETAILS</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">EMAIL</th>
+                            <th scope="col">DETAILS</th>
+                        </tr>
                     </thead>
 
                     @foreach ($contacts as $contact)
                     <tbody>
-                    <tr>
-                        <th scope="row">{{ $contact->id }}</th>
-                        <td>{{ $contact->name }}</td>
-                        <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->details }}</td>
-                    </tr>
+                        <tr>
+                            <th scope="row">{{ $contact->id }}</th>
+                            <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->details }}</td>
+                        </tr>
                     </tbody>
                     @endforeach
                 </table>

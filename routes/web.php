@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +21,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/register', [RegistrationController::class, 'index'])->name('register');
+Route::post('/register', [RegistrationController::class, 'register']);
+
 Route::resources([
-    'contact' => ContactController::class,
     'departments' => DepartmentController::class,
 ]);
 
-// Route::resource('contact', ContactController::class);
-// Route::resource('departments', ContactController::class);
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-// Route::get('/departments', [DepartmentController::class, 'index']);
-// Route::get('/departments/{id}', [DepartmentController::class, 'show']);
-// Route::post('/departments', [DepartmentController::class, 'store']);
-// Route::put('/departments/{id}', [DepartmentController::class, 'update']);
-// Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
+    Route::resources([
+        'contact' => ContactController::class,
+    ]);
+});

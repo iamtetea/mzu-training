@@ -32,10 +32,27 @@
                     <a class="nav-link" href="/departments">Departments</a>
                   </li>
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+
+                <div class="d-flex">
+                    @auth
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                    @endauth
+
+                    @guest
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/login">Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                    </ul>
+                    @endguest
+                </div>
               </div>
             </div>
         </nav>
