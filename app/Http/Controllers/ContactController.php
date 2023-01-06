@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Jobs\SendEmail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,9 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request)
     {
-        Contact::create($request->all());
+        $contact = Contact::create($request->all());
+        SendEmail::dispatch($contact->id);
+
         return redirect('/contact')->with('success', 'Contact submitted successfully');
     }
 
