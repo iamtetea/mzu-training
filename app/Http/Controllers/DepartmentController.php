@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DepartmentRequest;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DepartmentController extends Controller
 {
@@ -56,6 +57,7 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
+        // $data = Department::
         $data = Department::findOrFail($id);
         return view('department-details', compact('data'));
     }
