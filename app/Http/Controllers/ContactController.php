@@ -6,6 +6,7 @@ use App\Http\Requests\ContactRequest;
 use App\Jobs\SendEmail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
 {
@@ -38,9 +39,14 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request)
     {
-        $contact = Contact::create($request->all());
-        SendEmail::dispatch($contact->id);
+        $attributes = $request->all();
 
+        // store contact image
+        $image_path = $request->file('image')->store('images', 'public');
+        $attributes['image_path'] = $image_path;
+
+        $contact = Contact::create($attributes);
+        // SendEmail::dispatch($contact->id);
         return redirect('/contact')->with('success', 'Contact submitted successfully');
     }
 

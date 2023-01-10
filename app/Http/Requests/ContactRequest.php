@@ -26,6 +26,8 @@ class ContactRequest extends FormRequest
         return [
             'name' => 'required',
             'details' => 'required',
+            'image' => 'required',
+            // 'image' => 'required|mimes:jpg,bmp,png,jpeg,webp',
         ];
     }
 }

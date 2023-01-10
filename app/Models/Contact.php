@@ -13,6 +13,7 @@ class Contact extends Model
     protected $fillable = [
         'name',
         'email',
-        'details'
+        'details',
+        'image_path',
     ];
 }
