@@ -31,6 +31,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/departments">Departments</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/branches">Braches</a>
+                  </li>
                 </ul>
 
                 <div class="d-flex">

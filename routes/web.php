@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
@@ -37,5 +38,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resources([
         'contact' => ContactController::class,
+        'branches' => BranchesController::class,
     ]);
 });
