@@ -17,7 +17,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::orderBy('id', 'asc')->get();
+        $contacts = Contact::orderBy('id', 'asc')->paginate();
         return view('contact', compact('contacts'));
     }
 
@@ -42,7 +42,7 @@ class ContactController extends Controller
         $attributes = $request->all();
 
         // store contact image
-        $image_path = $request->file('image')->store('images', 'public');
+        $image_path = $request->file('image')->store('images/test', 'public');
         $attributes['image_path'] = $image_path;
 
         $contact = Contact::create($attributes);
